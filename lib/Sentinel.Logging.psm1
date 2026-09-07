@@ -11,7 +11,7 @@ function Write-SentinelLog {
 
     $t = Get-Date -Format 'o'
 
-    Write-Host "$t [$Level] $Message"
+    [Console]::Error.WriteLine("$t [$Level] $Message")
 }
 
 function Write-SentinelSection {
@@ -21,5 +21,6 @@ function Write-SentinelSection {
         [string]$Title
     )
 
-    Write-Host "`n=== $Title ==="
+    [Console]::Error.WriteLine("")
+    [Console]::Error.WriteLine("=== $Title ===")
 }

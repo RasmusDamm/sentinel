@@ -1,0 +1,15 @@
+2026-09-07T17:41:14+02:00 [INFO] Collecting users
+
+=== Users ===
+2026-09-07T17:41:14+02:00 [INFO] Collecting services
+
+=== Services ===
+2026-09-07T17:41:14+02:00 [INFO] Collecting listening TCP ports
+
+=== Listening TCP ports ===
+2026-09-07T17:41:14+02:00 [INFO] Collecting sudo members
+
+=== Sudo members ===
+
+===  ===
+2026-09-07T17:41:14+02:00 [INFO] Sentinel complete

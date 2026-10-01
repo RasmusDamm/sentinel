@@ -3,15 +3,15 @@ function Write-SentinelLog {
     param(
         [Parameter(Mandatory)]
         [ValidateSet('INFO','WARN','ERROR')]
-        [string]$Level,
+        [string]$Level = 'INFO',
 
         [Parameter(Mandatory)]
         [string]$Message
     )
 
-    $t = Get-Date -Format 'o'
+    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
 
-    [Console]::Error.WriteLine("$t [$Level] $Message")
+    [Console]::Error.WriteLine("$ts [$Level] $Message")
 }
 
 function Write-SentinelSection {
@@ -24,3 +24,4 @@ function Write-SentinelSection {
     [Console]::Error.WriteLine("")
     [Console]::Error.WriteLine("=== $Title ===")
 }
+Export-ModuleMember -Function Write-SentinelLog, Write-SentinelSection

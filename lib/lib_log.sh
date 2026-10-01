@@ -5,7 +5,7 @@ _log()
 
     local msg="$*"
 
-    printf '%s [%s] %s\n' \
+    printf '[%s] [%s] %s\n' \
         "$(date -Iseconds)" "$level" "$msg" >&2
 
 }
@@ -37,8 +37,8 @@ require_command()
     local command="$1"
 
     if ! command -v "$command" >/dev/null 2>&1; then
-        log_error "Mangler kommando: $command"
-        exit 1
+        log_error "Missing command: $command"
+        return 1
     fi
 }
 

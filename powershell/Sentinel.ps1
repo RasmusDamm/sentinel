@@ -52,6 +52,10 @@ function Get-SentinelPorts {
         }
 }
 
+function Read-Config {
+    $global:config = Get-Content -LiteralPath "$here/config/sentinel.json" -Raw -Encoding utf8 | ConvertFrom-Json
+}
+
 function Export-Report {
     Write-SentinelSection -Title "Create Report"
     Write-SentinelLog -Level INFO -Message "Finding all failed logins"
@@ -61,6 +65,11 @@ function Export-Report {
         $_ -cmatch '^\S+\s+LOGIN_FAILED(?:\s|$)'
     })
 
+
+    if ($failed.Count -ge $Global:config.warningThreshold) {
+        Write-SentinelLog -Level ERROR -Message "Warning: Failed login count is greter than the threshold"
+    }
+
     $report = [PSCustomObject]@{
         totalLines = $lines.Count
         failed_logins = $failed.Count
@@ -69,7 +78,10 @@ function Export-Report {
     $report | ConvertTo-Json | Set-Content 'rapport.json'
 }
 
+
+
 function Invoke-SentinelMain {
+    Read-Config
     Get-SentinelUsers
     Get-SentinelServices
     Get-SentinelPorts
